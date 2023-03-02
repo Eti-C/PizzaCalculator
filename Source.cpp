@@ -44,6 +44,7 @@ int main(int argc, char* argv[])
 	struct sockaddr_in server;
 	int c;
 	struct sockaddr_in client;
+	const char* message;
 
 	printf("\nInitialising Winsock...");
 	if (WSAStartup(MAKEWORD(2, 2), &wsa) != 0)
@@ -89,6 +90,12 @@ int main(int argc, char* argv[])
 	}
 
 	puts("Connection accepted");
+
+	//Reply to client
+	message = "Hello Client , I have received your connection. But I have to go now, bye\n";
+	send(new_socket, message, strlen(message), 0);
+
+	getchar();
 
 
 	closesocket(s);
